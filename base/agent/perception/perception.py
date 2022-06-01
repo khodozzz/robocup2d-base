@@ -12,12 +12,20 @@ class Perception(Thread):
     def handle_msg(self, msg):
         # print('PERCEPTION:', msg)
         parser = MessageParser()
-        msg_type, msg_time, objects = parser.parse(msg)
+        msg_type, msg_time, data = parser.parse(msg)
 
         if msg_type == 'sense_body':
             self.agent.sense_body_event.set()
+            self.handle_see(msg_time, data)
         elif msg_type == 'see':
             self.agent.see_event.set()
+            self.handle_sense_body(msg_time, data)
+
+    def handle_see(self, msg_time, objects):
+        pass
+
+    def handle_sense_body(self, msg_time, sense_body):
+        pass
 
     def run(self):
         while True:
