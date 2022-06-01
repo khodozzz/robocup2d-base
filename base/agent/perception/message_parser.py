@@ -19,6 +19,7 @@ class MessageParser:
         if hasattr(self, msg_func):
             # call the appropriate function with this message
             return getattr(self, msg_func).__call__(linked)
+        return None, None, None
 
     def _link_text(self, text):
         """
